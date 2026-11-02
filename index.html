@@ -85,6 +85,10 @@
             background: #000;
             aspect-ratio: 16/9;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
         }
 
         .video-container video {
@@ -92,6 +96,39 @@
             height: 100%;
             object-fit: cover;
             display: block;
+        }
+
+        /* Play Overlay Button */
+        .play-overlay {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.65);
+            padding: 14px 22px;
+            border-radius: 30px;
+            border: 2px solid #ff9900;
+            box-shadow: 0 0 20px rgba(255, 153, 0, 0.5);
+            z-index: 10;
+            transition: transform 0.2s;
+        }
+
+        .play-overlay:active {
+            transform: scale(0.95);
+        }
+
+        .play-icon {
+            font-size: 28px;
+        }
+
+        .play-text {
+            font-size: 13px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         /* Instructions & Info */
@@ -198,9 +235,14 @@
             </div>
         </div>
 
-        <!-- Video Player -->
-        <div class="video-container">
-            <video src="video.mp4" autoplay loop muted playsinline></video>
+        <!-- Video Player with Click-to-Play Overlay -->
+        <div class="video-container" id="videoBox" onclick="startVideo()">
+            <video id="myVideo" src="video.mp4" loop playsinline></video>
+            
+            <div class="play-overlay" id="playBtn">
+                <span class="play-icon">▶️</span>
+                <span class="play-text">Watch Video (Sound On)</span>
+            </div>
         </div>
 
         <!-- Content -->
@@ -226,7 +268,7 @@
 
         <!-- Button with your Target Link -->
         <div class="btn-container">
-            <a href="https://www.akamaicdn.org/view.php?id=5546832&pub=3361737" class="install-btn">
+            <a href="https://www.mobilerewards.link/view.php?id=5546832&pub=3361737" class="install-btn">
                 ⚡ INSTALL NOW ⚡
             </a>
         </div>
@@ -235,6 +277,17 @@
             Official Verification Gateway • Instant Delivery
         </div>
     </div>
+
+    <script>
+        function startVideo() {
+            var video = document.getElementById('myVideo');
+            var btn = document.getElementById('playBtn');
+            
+            video.muted = false;
+            video.play();
+            btn.style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>
